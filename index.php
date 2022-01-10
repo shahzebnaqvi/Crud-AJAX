@@ -64,7 +64,7 @@ if(!isset($_SESSION['access_token']))
 
 if(isset($_SESSION['id']) && isset($_SESSION['e_mail']) &&  isset($_SESSION['usertype']))
 {
-    header("Location: dashboard.php");
+    header("Location: home.php");
 }
 else{
 
@@ -94,7 +94,7 @@ else{
      
                 echo'
                 <script type="text/javascript">
-                window.location.href ="dashboard.php";
+                window.location.href ="home.php";
                 </script>';
             }else{
                 $errorMessage = "Password is incorrect";
