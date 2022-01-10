@@ -24,4 +24,6 @@ if ($conn->connect_error) {
 // echo "Connected successfully";
 return $conn;
 }
+$connect = new PDO("mysql:host=localhost;dbname=project_waleed", "root", "");
+
 ?>
