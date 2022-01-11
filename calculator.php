@@ -19,7 +19,6 @@ if(isset($_REQUEST['calculate'])){
     $noofyear = $_REQUEST['noofyear'];
     $discount = $_REQUEST['discount'];
 
-
        $total=  $annual*$earningsrate*$risk*$paidtoowner *$noofyear*$discount;
     echo $total;
     echo "aaab";
