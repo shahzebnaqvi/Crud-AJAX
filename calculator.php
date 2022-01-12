@@ -98,18 +98,17 @@ $riskvalue="";
                                             <div class="col-md-5">
                                                 <div class="form-group">
                                                     <label>Annual earnings before interest, taxes, depreciation, and amortization ($)</label>
-                                                    <input type="number" name="annual" class="form-control">
+                                                    <input type="number" name="annual" class="form-control" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Anticipated rate of earnings/compensation growth (0 if level) (0% to 100%)</label>
-                                                    <input type="number" name="earningsrate" class="form-control">
+                                                    <input type="number" name="earningsrate" class="form-control" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Level of business/industry/financial risk
                                                     (Typically restaurants and retail are lower risk than manufacturing and high tech)</label>
-                                                    <select class="select" name="risk">
+                                                    <select class="select" name="risk" required>
                                                         <option>Select</option>
-                                                        <option value="1">None</option>
                                                         <option value="2">Low</option>
                                                         <option value="3">Average</option>
                                                         <option value="4">Considerable</option>
@@ -121,17 +120,17 @@ $riskvalue="";
                                             <div class="col-md-5">
                                                 <div class="form-group">
                                                     <label>"Excess compensation" paid to owners (if any) ($)</label>
-                                                    <input type="number" name="paidtoowner" class="form-control">
+                                                    <input type="number" name="paidtoowner" class="form-control" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Number of years earnings are expected to continue
                                                     (maximum 10 which assumes perpetuity) (0 to 10)</label>
-                                                    <input type="number" name="noofyear" min="0" max="10" class="form-control">
+                                                    <input type="number" name="noofyear" min="0" max="10" class="form-control" required>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label>Discount for lack of marketability (-100% to 100%)</label>
-                                                    <input type="number" name="discount" class="form-control" min="-100" max="100" >
+                                                    <input type="number" name="discount" class="form-control" min="-100" max="100" required>
                                                 </div>
                                                 <div class="text-right">
                                                     <button type="submit" class="btn btn-primary" name="calculate">Calculate</button>
