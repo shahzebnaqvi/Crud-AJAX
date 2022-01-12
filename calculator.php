@@ -2,7 +2,7 @@
 include_once("includes/function.php");
 $total="";
 if(isset($_REQUEST['calculate'])){
-
+$riskvalue="";
     // echo $_REQUEST['annual'];
     // echo $_REQUEST['earningsrate'];
     // echo $_REQUEST['risk'];
@@ -18,6 +18,19 @@ if(isset($_REQUEST['calculate'])){
     $noofyear = $_REQUEST['noofyear'];
     $discount = $_REQUEST['discount'];
 
+
+    if($risk==2){
+        $riskvalue="Low";
+    }
+    else if($risk==3){
+        $riskvalue="Average";
+    }
+    else if($risk==4){
+        $riskvalue="Considerable";
+    }
+    else if($risk==5){
+        $riskvalue="High";
+    }
     $total=  $annual*$earningsrate*$risk*$paidtoowner *$noofyear*$discount;
 }
 
@@ -100,7 +113,7 @@ if(isset($_REQUEST['calculate'])){
                                                         <option value="2">Low</option>
                                                         <option value="3">Average</option>
                                                         <option value="4">Considerable</option>
-                                                        <option value="4">High</option>
+                                                        <option value="5">High</option>
                                                     </select>
                                                 </div>
 
@@ -145,8 +158,8 @@ if(isset($_REQUEST['calculate'])){
                 <table class="table">
                 <thead>
                 <tr>
-                <th>Firstname</th>
-                <th>Lastname</th>
+                <th>Title</th>
+                <th>Value</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -161,7 +174,7 @@ if(isset($_REQUEST['calculate'])){
                 <tr>
                 <td>Level of business/industry/financial risk
                 (Typically restaurants and retail are lower risk than manufacturing and high tech)</td>
-                <td> '.$risk.'</td>
+                <td> '.$riskvalue.'</td>
                 </tr>
                 <tr>
                 <td>"Excess compensation" paid to owners (if any) ($)</td>
