@@ -2,7 +2,6 @@
 include_once("includes/function.php");
 $total="";
 if(isset($_REQUEST['calculate'])){
-        echo "aaab";
 
     // echo $_REQUEST['annual'];
     // echo $_REQUEST['earningsrate'];
@@ -19,9 +18,7 @@ if(isset($_REQUEST['calculate'])){
     $noofyear = $_REQUEST['noofyear'];
     $discount = $_REQUEST['discount'];
 
-       $total=  $annual*$earningsrate*$risk*$paidtoowner *$noofyear*$discount;
-    echo $total;
-    echo "aaab";
+    $total=  $annual*$earningsrate*$risk*$paidtoowner *$noofyear*$discount;
 }
 
 
@@ -85,75 +82,111 @@ if(isset($_REQUEST['calculate'])){
                                     <div class="row">                                    
                                         <form action="" id="myform">
 
-                                        <div class="col-md-5">
-                                            <div class="form-group">
-                                                <label>Annual earnings before interest, taxes, depreciation, and amortization ($)</label>
-                                                <input type="number" name="annual" class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Anticipated rate of earnings/compensation growth (0 if level) (0% to 100%)</label>
-                                                <input type="number" name="earningsrate" class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Level of business/industry/financial risk
-                                                (Typically restaurants and retail are lower risk than manufacturing and high tech)</label>
-                                                <select class="select" name="risk">
-                                                    <option>Select</option>
-                                                    <option value="1">None</option>
-                                                    <option value="2">Low</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="4">Considerable</option>
-                                                    <option value="4">High</option>
-                                                </select>
-                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="form-group">
+                                                    <label>Annual earnings before interest, taxes, depreciation, and amortization ($)</label>
+                                                    <input type="number" name="annual" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Anticipated rate of earnings/compensation growth (0 if level) (0% to 100%)</label>
+                                                    <input type="number" name="earningsrate" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Level of business/industry/financial risk
+                                                    (Typically restaurants and retail are lower risk than manufacturing and high tech)</label>
+                                                    <select class="select" name="risk">
+                                                        <option>Select</option>
+                                                        <option value="1">None</option>
+                                                        <option value="2">Low</option>
+                                                        <option value="3">Average</option>
+                                                        <option value="4">Considerable</option>
+                                                        <option value="4">High</option>
+                                                    </select>
+                                                </div>
 
-                                        </div>
-                                        <div class="col-md-5">
-                                            <div class="form-group">
-                                                <label>"Excess compensation" paid to owners (if any) ($)</label>
-                                                <input type="number" name="paidtoowner" class="form-control">
                                             </div>
-                                            <div class="form-group">
-                                                <label>Number of years earnings are expected to continue
-                                                (maximum 10 which assumes perpetuity) (0 to 10)</label>
-                                                <input type="number" name="noofyear" min="0" max="10" class="form-control">
-                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="form-group">
+                                                    <label>"Excess compensation" paid to owners (if any) ($)</label>
+                                                    <input type="number" name="paidtoowner" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Number of years earnings are expected to continue
+                                                    (maximum 10 which assumes perpetuity) (0 to 10)</label>
+                                                    <input type="number" name="noofyear" min="0" max="10" class="form-control">
+                                                </div>
 
-                                            <div class="form-group">
-                                                <label>Discount for lack of marketability (-100% to 100%)</label>
-                                                <input type="number" name="discount" class="form-control" min="-100" max="100" >
+                                                <div class="form-group">
+                                                    <label>Discount for lack of marketability (-100% to 100%)</label>
+                                                    <input type="number" name="discount" class="form-control" min="-100" max="100" >
+                                                </div>
+                                                <div class="text-right">
+                                                    <button type="submit" class="btn btn-primary" name="calculate">Calculate</button>
+                                                </div>
                                             </div>
-                                            <div class="text-right">
-                                                <button type="submit" class="btn btn-primary" name="calculate">Calculate</button>
-                                            </div>
-                                        </div>
-                                    </form>
+                                        </form>
                                     </div>
 
 
                                     
                                     <div id="msg"></div>
-                                 </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-<?php
+                <?php
                 if($total!=""){  echo'
                 <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card-box">
-                            <div class="card-block">
-                                <h4 class="card-title">Total  = '.$total.'</h4>
+                <div class="col-lg-12">
+                <div class="card-box">
+                <div class="card-block">
+                <table class="table">
+                <thead>
+                <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                <td>Annual earnings before interest, taxes, depreciation, and amortization ($)</td>
+                <td> '.$annual.'</td>
+                </tr>
+                <tr>
+                <td>Anticipated rate of earnings/compensation growth (0 if level) (0% to 100%)</td>
+                <td> '.$earningsrate.'</td>
+                </tr>
+                <tr>
+                <td>Level of business/industry/financial risk
+                (Typically restaurants and retail are lower risk than manufacturing and high tech)</td>
+                <td> '.$risk.'</td>
+                </tr>
+                <tr>
+                <td>"Excess compensation" paid to owners (if any) ($)</td>
+                <td> '.$paidtoowner.'</td>
+                </tr>
+                <tr>
+                <td>Number of years earnings are expected to continue
+                (maximum 10 which assumes perpetuity) (0 to 10)</td>
+                <td> '.$noofyear.'</td>
+                </tr>
+                <tr>
+                <td>Discount for lack of marketability (-100% to 100%)</td>
+                <td> '.$discount.'</td>
+                </tr>
+                </tbody>
+                </table>
+                <h3  style="text-align:center">Total  = '.$total.'</h3>
 
-                            </div>
-                        </div>
-                    </div>
+                </div>
+                </div>
+                </div>
                 </div>';
 
 
-} ?>
+            } ?>
 
 
 
@@ -170,17 +203,17 @@ if(isset($_REQUEST['calculate'])){
 
 
 
-            </div>
-
-
-            <?php include_once("includes/notification.php");?>
         </div>
+
+
+        <?php include_once("includes/notification.php");?>
     </div>
-    <script type="text/javascript" src="assets/js/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="assets/js/jquery.slimscroll.js"></script>
-    <script type="text/javascript" src="assets/js/select2.min.js"></script>
-    <script type="text/javascript" src="assets/js/app.js"></script>
+</div>
+<script type="text/javascript" src="assets/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="assets/js/jquery.slimscroll.js"></script>
+<script type="text/javascript" src="assets/js/select2.min.js"></script>
+<script type="text/javascript" src="assets/js/app.js"></script>
 </body>
 
 </html>
