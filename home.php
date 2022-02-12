@@ -1,17 +1,16 @@
 <?php
 include_once("includes/function.php");
+checkLogout();
 ?>
 
 <!DOCTYPE html>
 <html>
 
-
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
-    <title>Preadmin - Bootstrap Admin Template</title>
+    <title>Ajax Crud</title>
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
@@ -34,28 +33,12 @@ include_once("includes/function.php");
 
           <div class="page-wrapper">
             <div class="content container-fluid">
-
-
-                
-
-
-
-
-
-
-
-
-
-
-
-
-
                 <div class="row">
 
                     <div class="col-lg-4">
                         <div class="card-box">
                             <div class="card-block">
-                                <h4 class="card-title">Responsive Tables</h4>
+                                <h4 class="card-title">Ajax Crud</h4>
                                 <div class="table-responsive">
                                     <form action="" id="myform">
                                       <div class="form-group">
@@ -82,7 +65,7 @@ include_once("includes/function.php");
                     <div class="col-lg-8">
                         <div class="card-box">
                             <div class="card-block">
-                                <h4 class="card-title">Responsive Tables</h4>
+                                <h4 class="card-title">Ajax Crud</h4>
                                 <table class="table">
                                   <thead>
                                     <tr>
@@ -99,32 +82,9 @@ include_once("includes/function.php");
                   </div>
               </div>
           </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       </div>
-
-
-      <?php include_once("includes/notification.php");?>
   </div>
 </div>
-<div class="sidebar-overlay" data-reff=""></div>
 <script type="text/javascript" src="assets/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="assets/js/jquery.slimscroll.js"></script>

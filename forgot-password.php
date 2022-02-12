@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
-    <title>Register</title>
+    <title>Forgot Password</title>
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
@@ -21,57 +21,61 @@
      <?php
 
      include_once("includes/function.php");
-     loginCheck();
      $conn = connect_db();
+     loginCheck();
 
      if(isset($_REQUEST['submit'])){
-      $email_search = "SELECT * FROM authentication where email = '".$_REQUEST['email']."'";
+    $email = mysqli_real_escape_string($conn,$_REQUEST['email']);
 
-  // $result = mysqli_num_rows($email_search);
-      $query = mysqli_query($conn,$email_search);
-      if(mysqli_num_rows($query)>0){
-        echo"<script type=\"text/javascript\">
-        alert('This E-mail is Already Register')
-        </script>";
+    $e_mailquary = "SELECT * FROM authentication where email = '".$email."'";
+    $query = mysqli_query(connect_db(),$e_mailquary);
+    $e_mailcount = mysqli_num_rows($query);
+    
+    if($e_mailcount){
 
-    }else{
-    // print_r($_REQUEST);
-        $token = bin2hex(random_bytes(15));
-        $sql = 'INSERT INTO `authentication`(`id`, `create_at`, `name`, `email`, `pass`, `token`) VALUES  (NULL, CURRENT_TIMESTAMP, \''.$_REQUEST['name'].'\', \''.$_REQUEST['email'].'\', \''.$_REQUEST['pass'].'\', \''.$token.'\')';
-    // echo $sql;
-            insert_query($sql);
+        $userdata = mysqli_fetch_assoc($query);
+        $username = $userdata['name'];
+        $token = $userdata['token'];
 
-    echo"<script type=\"text/javascript\">
-    alert('account created successfully')
-      window.location = 'index.php'
-      </script>";
+        $subject = "Password Reset";
+        $message = "localhost/deevlooper/reset-password.php?token=".$token."";
+        $sender = "From : waleedasad27@gmail.com";
+        if (mail($email, $subject, $message,$sender)) {
+            echo '<script>
+                    alert("Check Your E-mail To Reset Password")
+                    </script>';
+            echo '
+                <script>
+                    location.replace(\'index.php\');
+                </script>';
+        }else{
+            echo '<script>
+                    alert("Failed");
+                    </script>';
         }
-    }
+}else{
+            echo '<script>
+                    alert("E-mail Does Not Exist")
+                    </script>';
+}
+}
     ?>
     <div class="main-wrapper">
         <div class="account-page">
             <div class="container">
-                <h3 class="account-title">Register</h3>
+                <h3 class="account-title">Reset Password</h3>
                 <div class="account-box">
                     <div class="account-wrapper">
                         <div class="account-logo">
                             <a href="index.html"><img src="assets/img/logo2.png" alt="Preadmin"></a>
                         </div>
-                        <form action="register.php">
-                            <div class="form-group form-focus">
-                                <label class="control-label">Username</label>
-                                <input class="form-control floating" type="text" name="name">
-                            </div>
+                        <form method="POST">
                             <div class="form-group form-focus">
                                 <label class="control-label">Email</label>
-                                <input class="form-control floating" type="text" name="email">
-                            </div>
-                            <div class="form-group form-focus">
-                                <label class="control-label">Password</label>
-                                <input class="form-control floating" type="password" name="pass">
+                                <input class="form-control" type="email" name="email" required="" placeholder="Enter email">
                             </div>
                             <div class="form-group text-center">
-                                <button class="btn btn-primary btn-block account-btn" type="submit" name="submit">Register</button>
+                                <button class="btn btn-primary btn-block account-btn" type="submit" name="submit">Send E-mail</button>
                             </div>
                             <div class="text-center">
                                 <a href="index.php">Already have an account?</a>
