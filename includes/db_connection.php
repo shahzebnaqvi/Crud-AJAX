@@ -5,12 +5,12 @@ if($val==0){
 $servername = "localhost";
 $username = "root";
 $password = "";
- $dbname = "project_waleed";}
+ $dbname = "deevlooper";}
  if($val==1){
  	$servername = "localhost";
-	$username = "jgecynbrge";
-	$password = "xqPMz8JgUn";
- 	$dbname = "jgecynbrge";
+	$username = "hoftnzmy_deevloo";
+	$password = "deevloper11";
+ 	$dbname = "hoftnzmy_project_waleed";
  }
 
 // Create connection
@@ -24,6 +24,4 @@ if ($conn->connect_error) {
 // echo "Connected successfully";
 return $conn;
 }
-$connect = new PDO("mysql:host=localhost;dbname=project_waleed", "root", "");
-
 ?>

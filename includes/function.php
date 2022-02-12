@@ -1,8 +1,7 @@
 <?php 
 
 session_start();
-
-include_once('db_connection.php'); 
+include_once('includes/db_connection.php'); 
 $conn = connect_db();
 function insert_query($sql)
 {$conn = connect_db();
@@ -15,54 +14,28 @@ function insert_query($sql)
 	mysqli_close($conn);
 }
 
-if(isset($_POST["action"]))
+function create_user($name,$email){
+	$token = bin2hex(random_bytes(15));
+	$name = mysqli_real_escape_string(connect_db(),$name);
+	$e_mailquary = " select * from authentication where email = '".$email."'";
+    $query = mysqli_query(connect_db(),$e_mailquary);
+    $e_mailcount = mysqli_num_rows($query);
+    if($e_mailcount==0){
+	$sql = 'INSERT INTO `authentication`(`id`, `create_at`, `name`, `email`, `pass`, `token`) VALUES (NULL , CURRENT_TIMESTAMP, "'.$name.'", "'.$email.'", "'.$token.'", "'.$token.'")';
+	insert_query($sql);
+	}
+}
+
+function loginCheck(){
+	if(isset($_SESSION['email'])){
+		header('location:home.php');
+	}
+}
+
+function checkLogout()
 {
-	if($_POST["action"] == "insert")
-	{
-		$query = "
-		INSERT INTO sample_table (`id`, `name`, `email`, `password`, `image`) VALUES (NULL,'".$_POST["name"]."','".$_POST["email"]."', '".$_POST["password"]."','".$_POST["image"]."')
-		";
-		$statement = $connect->prepare($query);
-		$statement->execute();
-		echo '<p>Data Inserted...</p>';
-	}
-	if($_POST["action"] == "fetch_single")
-	{
-		$query = "
-		SELECT * FROM sample_table WHERE id = '".$_POST["id"]."'
-		";
-		$statement = $connect->prepare($query);
-		$statement->execute();
-		$result = $statement->fetchAll();
-		foreach($result as $row)
-		{
-			$output['name'] = $_POST["name"];
-			$output['email'] = $_POST["email"];
-			$output['password'] = $_POST["password"];
-			$output['image'] = $_POST["image"];
-		}
-		echo json_encode($output);
-	}
-	if($_POST["action"] == "update")
-	{
-		$query = "
-		UPDATE sample_table 
-		SET name = '".$_POST["name"]."', 
-		email = '".$_POST["email"]."' , 
-		password = '".$_POST["password"]."' , 
-		image = '".$_POST["image"]."' 
-		WHERE id = '".$_POST["id"]."'
-		";
-		$statement = $connect->prepare($query);
-		$statement->execute();
-		echo '<p>Data Updated</p>';
-	}
-	if($_POST["action"] == "delete")
-	{
-		$query = "DELETE FROM sample_table WHERE id = '".$_POST["id"]."'";
-		$statement = $connect->prepare($query);
-		$statement->execute();
-		echo '<p>Data Deleted</p>';
+	if(!isset($_SESSION['email'])){
+		header('location:index.php');
 	}
 }
 
